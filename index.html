@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Loan EMI Calculator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-landmark"></i> SmartFinance
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#calculator">Loan Calculator</a></li>
+            <li><a href="#rates">Interest Rates</a></li>
+            <li><a href="#partners">Bank Partners</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="btn btn-primary">Apply Loan</button>
+        </div>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Smart Loan EMI Calculator</h1>
+            <p>Calculate Your Monthly Loan Payments Instantly and plan your financial future with precision.</p>
+            <a href="#calculator" class="btn btn-primary hero-btn">Calculate Now</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Loan Category Cards -->
+        <section class="loan-categories">
+            <div class="category-card" data-loan="home">
+                <div class="icon-wrapper"><i class="fas fa-home"></i></div>
+                <h3>Home Loan</h3>
+                <p>Starts at 8.5% p.a.</p>
+                <button class="btn btn-outline btn-sm">Calculate</button>
+            </div>
+            <div class="category-card" data-loan="car">
+                <div class="icon-wrapper"><i class="fas fa-car"></i></div>
+                <h3>Car Loan</h3>
+                <p>Starts at 8.8% p.a.</p>
+                <button class="btn btn-outline btn-sm">Calculate</button>
+            </div>
+            <div class="category-card" data-loan="personal">
+                <div class="icon-wrapper"><i class="fas fa-user"></i></div>
+                <h3>Personal Loan</h3>
+                <p>Starts at 10.5% p.a.</p>
+                <button class="btn btn-outline btn-sm">Calculate</button>
+            </div>
+            <div class="category-card" data-loan="education">
+                <div class="icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Education Loan</h3>
+                <p>Starts at 9.0% p.a.</p>
+                <button class="btn btn-outline btn-sm">Calculate</button>
+            </div>
+            <div class="category-card" data-loan="business">
+                <div class="icon-wrapper"><i class="fas fa-briefcase"></i></div>
+                <h3>Business Loan</h3>
+                <p>Starts at 11.2% p.a.</p>
+                <button class="btn btn-outline btn-sm">Calculate</button>
+            </div>
+        </section>
+
+        <!-- Main Calculator Section -->
+        <section id="calculator" class="calculator-section box-shadow">
+            <div class="calc-inputs">
+                <h2>EMI Calculator</h2>
+                
+                <!-- Loan Amount -->
+                <div class="input-group">
+                    <div class="label-row">
+                        <label for="loan-amount">Loan Amount</label>
+                        <div class="input-wrapper">
+                            <span>₹</span>
+                            <input type="number" id="loan-amount" min="10000" max="5000000" value="1000000">
+                        </div>
+                    </div>
+                    <input type="range" id="loan-slider" min="10000" max="5000000" step="10000" value="1000000">
+                    <div class="range-labels">
+                        <span>₹ 10K</span>
+                        <span>₹ 50L</span>
+                    </div>
+                </div>
+
+                <!-- Interest Rate -->
+                <div class="input-group">
+                    <div class="label-row">
+                        <label for="interest-rate">Interest Rate (p.a.)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="interest-rate" min="1" max="20" step="0.1" value="8.5">
+                            <span>%</span>
+                        </div>
+                    </div>
+                    <input type="range" id="interest-slider" min="1" max="20" step="0.1" value="8.5">
+                    <div class="range-labels">
+                        <span>1%</span>
+                        <span>20%</span>
+                    </div>
+                </div>
+
+                <!-- Loan Tenure -->
+                <div class="input-group">
+                    <div class="label-row">
+                        <label for="loan-tenure">Loan Tenure</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="loan-tenure" min="1" max="30" value="20">
+                            <span>Yr</span>
+                        </div>
+                    </div>
+                    <input type="range" id="tenure-slider" min="1" max="30" step="1" value="20">
+                    <div class="range-labels">
+                        <span>1 Yr</span>
+                        <span>30 Yrs</span>
+                    </div>
+                </div>
+
+                <div class="calc-actions">
+                    <button id="download-schedule" class="btn btn-outline">
+                        <i class="fas fa-file-pdf"></i> Download Schedule
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calculator Results -->
+            <div class="calc-results">
+                <div class="result-cards">
+                    <div class="result-card primary">
+                        <p>Monthly EMI</p>
+                        <h3 id="monthly-emi">₹ 0</h3>
+                    </div>
+                    <div class="result-card">
+                        <p>Principal Amount</p>
+                        <h4 id="principal-amount">₹ 0</h4>
+                    </div>
+                    <div class="result-card">
+                        <p>Total Interest</p>
+                        <h4 id="total-interest">₹ 0</h4>
+                    </div>
+                    <div class="result-card highlight">
+                        <p>Total Payment</p>
+                        <h4 id="total-payment">₹ 0</h4>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="emiChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bank Partners & Rates Table -->
+        <section id="rates" class="rates-section">
+            <h2 class="section-title">Compare Top Bank Interest Rates</h2>
+            <div class="table-responsive box-shadow">
+                <table class="rates-table">
+                    <thead>
+                        <tr>
+                            <th>Bank Name</th>
+                            <th>Home Loan</th>
+                            <th>Personal Loan</th>
+                            <th>Car Loan</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="bank-info"><div class="bank-icon sbi"></div> State Bank of India</div></td>
+                            <td>8.50% - 9.15%</td>
+                            <td>11.00% - 14.00%</td>
+                            <td>8.65% - 9.45%</td>
+                            <td><button class="btn btn-primary btn-sm">Apply Now</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="bank-info"><div class="bank-icon hdfc"></div> HDFC Bank</div></td>
+                            <td>8.55% - 9.10%</td>
+                            <td>10.50% - 21.00%</td>
+                            <td>8.75% - 10.00%</td>
+                            <td><button class="btn btn-primary btn-sm">Apply Now</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="bank-info"><div class="bank-icon icici"></div> ICICI Bank</div></td>
+                            <td>8.75% - 9.65%</td>
+                            <td>10.50% - 16.00%</td>
+                            <td>8.85% - 10.35%</td>
+                            <td><button class="btn btn-primary btn-sm">Apply Now</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="bank-info"><div class="bank-icon axis"></div> Axis Bank</div></td>
+                            <td>8.75% - 9.15%</td>
+                            <td>10.49% - 21.00%</td>
+                            <td>8.85% - 14.00%</td>
+                            <td><button class="btn btn-primary btn-sm">Apply Now</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Financial Tips -->
+        <section class="tips-section">
+            <h2 class="section-title">Smart Financial Tips for Borrowers</h2>
+            <div class="tips-grid">
+                <div class="tip-card box-shadow">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h4>Pay Larger Down Payment</h4>
+                    <p>A higher down payment reduces your principal amount, lowering your EMI and total interest paid.</p>
+                </div>
+                <div class="tip-card box-shadow">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Choose Shorter Tenure</h4>
+                    <p>While EMIs might be higher, a shorter loan tenure drastically cuts down the total interest outgo.</p>
+                </div>
+                <div class="tip-card box-shadow">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h4>Make Part Payments</h4>
+                    <p>Use bonuses or extra savings to make part payments to reduce your outstanding principal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section box-shadow">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <h4>What is an EMI?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>EMI stands for Equated Monthly Installment. It is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. Equated monthly installments are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How is EMI calculated?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The mathematical formula for calculating EMI is: EMI = P × r × (1 + r)^n / ((1 + r)^n - 1) where P is Principal loan amount, r is rate of interest calculated on a monthly basis, and n is loan tenure in months.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What happens if I make part-prepayments?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Making part-prepayments reduces your outstanding principal amount. This directly reduces the interest portion in your future EMIs, either lowering your EMI amount or decreasing the overall loan tenure depending on your bank's policy.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How can I find the best interest rate?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Maintain a good credit score (750+), compare rates across different banks, keep a low debt-to-income ratio, and occasionally negotiate with lenders when you have a strong financial profile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <i class="fas fa-landmark"></i> SmartFinance
+                </div>
+                <p>Your trusted partner for smart financial planning. Use our tools to make informed decisions for your future.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#calculator">EMI Calculator</a></li>
+                    <li><a href="#rates">Compare Rates</a></li>
+                    <li><a href="#partners">Bank Partners</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Loan Products</h4>
+                <ul>
+                    <li><a href="#">Home Loans</a></li>
+                    <li><a href="#">Personal Loans</a></li>
+                    <li><a href="#">Car & Auto Loans</a></li>
+                    <li><a href="#">Education Loans</a></li>
+                    <li><a href="#">Business Loans</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Finance Street, Mumbai, India</p>
+                <p><i class="fas fa-phone"></i> +91 1800 123 4567</p>
+                <p><i class="fas fa-envelope"></i> support@smartfinance.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartFinance. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
